@@ -17,11 +17,13 @@ class HomePage extends StatelessWidget {
               title: Text('CafeApp Admin'),
             ),
             body: ListView.builder(
-              itemCount: 10,
+              // itemCount: 10,
+              itemCount: ctrl.menus.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text('Title'),
-                  subtitle: Text('Price : 100'),
+                  title: Text(ctrl.menus[index].name ?? ''),
+                  // title: Text('Ram'),
+                  subtitle: Text((ctrl.menus[index].price ?? 0).toString()),
                   trailing: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {

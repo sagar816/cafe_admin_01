@@ -1,6 +1,5 @@
 import 'package:cafe_admin_01/controller/home_controller.dart';
 import 'package:cafe_admin_01/widgets/drop_down_btn.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,6 +30,7 @@ class AddProductPage extends StatelessWidget {
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: 10),
                     TextField(
+                      controller: ctrl.menuNameCtrl,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -39,6 +39,7 @@ class AddProductPage extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     TextField(
+                      controller: ctrl.menuDescriptionCtrl,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -48,6 +49,7 @@ class AddProductPage extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     TextField(
+                      controller: ctrl.menuImgCtrl,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -56,6 +58,7 @@ class AddProductPage extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     TextField(
+                      controller: ctrl.menuPriceCtrl,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -67,18 +70,22 @@ class AddProductPage extends StatelessWidget {
                       children: [
                         Flexible(
                             child: DropDownBtn(
-                          items: ['Cate1', 'Cate2', 'Cate3'],
-                          selectedItemText: 'Category',
+                          items: ['Food', 'Drinks', 'Meal'],
+                          selectedItemText: ctrl.category,
                           onSelected: (selectedValue) {
-                            print(selectedValue);
+                            ctrl.category = selectedValue ?? 'general';
+                            ctrl.update();
+                            // print(selectedValue);
                           },
                         )),
                         Flexible(
                             child: DropDownBtn(
-                          items: ['Brand1', 'Brand2', 'Brand3'],
-                          selectedItemText: 'Brand',
+                          items: ['Type1', 'Type2', 'Type3'],
+                          selectedItemText: ctrl.type,
                           onSelected: (selectedValue) {
-                            print(selectedValue);
+                            ctrl.type = selectedValue ?? 'No Type';
+                            ctrl.update();
+                            // print(selectedValue);
                           },
                         )),
                       ],
@@ -88,9 +95,12 @@ class AddProductPage extends StatelessWidget {
                     SizedBox(height: 10),
                     DropDownBtn(
                       items: ['true', 'false'],
-                      selectedItemText: 'Offer ?',
+                      selectedItemText: ctrl.discount.toString(),
                       onSelected: (selectedValue) {
-                        print(selectedValue);
+                        ctrl.discount =
+                            bool.tryParse(selectedValue ?? 'false') ?? false;
+                        ctrl.update();
+                        // print(selectedValue);
                       },
                     ),
                     SizedBox(height: 10),
@@ -98,8 +108,10 @@ class AddProductPage extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.indigoAccent,
                             foregroundColor: Colors.white),
-                        onPressed: () {},
-                        child: Text("Add Product"))
+                        onPressed: () {
+                          ctrl.addMenu();
+                        },
+                        child: Text("Add Menu"))
                   ],
                 ),
               ),

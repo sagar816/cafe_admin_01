@@ -5,7 +5,13 @@ String? SelectedValue;
 
 class DropDownBtn extends StatelessWidget {
   final List<String> items;
-  const DropDownBtn({super.key, required this.items});
+  final String selectedItemText;
+  final Function(String?) onSelected;
+  const DropDownBtn(
+      {super.key,
+      required this.items,
+      required this.selectedItemText,
+      required this.onSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +21,7 @@ class DropDownBtn extends StatelessWidget {
           child: DropdownButton2<String>(
             isExpanded: true,
             hint: Text(
-              'Select Item',
+              selectedItemText,
               style: TextStyle(
                 fontSize: 14,
                 color: Theme.of(context).hintColor,
@@ -33,7 +39,10 @@ class DropDownBtn extends StatelessWidget {
                     ))
                 .toList(),
             value: SelectedValue,
-            onChanged: (String? value) {},
+            onChanged: (String? value) {
+              onSelected(value);
+              // print(value);
+            },
             buttonStyleData: const ButtonStyleData(
               padding: EdgeInsets.symmetric(horizontal: 16),
               height: 40,

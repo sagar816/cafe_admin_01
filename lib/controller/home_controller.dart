@@ -70,6 +70,16 @@ class HomeController extends GetxController {
       print(e);
     } finally {
       update();
+    }        
+  }
+
+    deleteMenu(String id) async {
+    try {
+      await menuCollection.doc(id).delete();
+      fetchMenus();
+    } catch (e) {
+      Get.snackbar('Error', e.toString(), colorText: Colors.red);
+      print(e);
     }
   }
 

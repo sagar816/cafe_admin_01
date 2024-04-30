@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
                   trailing: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
+                      ctrl.deleteMenu(ctrl.menus[index].id ?? '');
                       // ctrl.testMethod();
                       // ctrl.test;QD
                       // print("delete pressed");
